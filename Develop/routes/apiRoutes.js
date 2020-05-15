@@ -12,12 +12,12 @@ app.get("/api/notes", function(req, res) {
 // Post route
 app.post("/api/notes", function(req, res) {
   var newNote = req.body;
-  noteArray.push(newNote)
+  noteArray.push(newNote);
 
-  // Add ID property to each new note
+// Add ID property to each new note
   uniqueID(noteArray);
 
-  // Write new JSON file with update array
+// Write new JSON file with update array
   fs.writeFile(path.join(__dirname, "../db/db.json"), JSON.stringify(noteArray), (err) => {
     if (err) {
       console.log("file not updated");
@@ -29,14 +29,42 @@ app.post("/api/notes", function(req, res) {
   
   });
 
-};
-
-// Add ID to new note
+  // Add ID to new note
 var uniqueID = function(arr) {
   for (i = 0; i < arr.length; i++) {
     arr[i].id = i + 1;
   }
 }
+
+// Delete route
+app.delete("/api/notes/:id", function(req, res) {
+  var noteID = req.params.id;
+    for (i = 0; i < noteArray.length; i++) {
+      if (noteID == noteArray[i].id) {
+        noteArray.splice(i, 1);
+      }
+    }
+
+// Put the new array through the Unique ID function
+  uniqueID(noteArray);
+
+// Rewrite the db.json file
+  fs.writeFile(path.join(__dirname, "../db/db.json"), JSON.stringify(noteArray), (err) => {
+    if (err) {
+      console.log("file not updated");
+    } else {
+      console.log("file updated");
+    }
+  })
+    res.json(noteID);
+  })
+
+};
+
+
+
+
+
 
 
   
