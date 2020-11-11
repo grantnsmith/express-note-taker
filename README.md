@@ -2,7 +2,7 @@
 A note taking application built with an express backend and deployed on Heroku.
 
 ## Links
-* [Deployed Application](https://intense-reef-49057.herokuapp.com/)
+* [Deployed Application](https://gnsmith-note-taker.herokuapp.com/)
 * [Video of Application in Action](https://drive.google.com/file/d/1IZt514ZyyUjncVhdxfLoPhIToCOtsYy3/view)
 
 ## Application in Action
